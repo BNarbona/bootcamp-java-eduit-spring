@@ -1,0 +1,116 @@
+<!-- listar los cupones del sitio -->
+<!--namespaces-->
+<!DOCTYPE html>
+<html lang="es" 
+	xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<!--incluir css-->
+	<link rel="stylesheet" 
+		type="text/css" 
+		media="all"
+		th:href="@{/css/site.css}" />
+		
+		<script>
+		  function guardarId(id){   //guardarId =(id) => {}
+			//localStorage.setItem();
+			alert(id);
+		}
+		</script>
+		
+		<style>
+		.deleteLink{
+			text-decoration:underline;
+			cursor:pointer;
+		}
+		
+		
+		.socios-container{
+			background-color: antiquewhite;
+			display:flex;
+			justify-content: space-evenly;
+			align-items:center;
+			flex-direction:column;
+			margin:10px;
+			height:400px;
+		}
+		
+		/*selectores hermanos*/
+		
+		.table{
+			border: 1px solid;
+			border-spacing: 0px; /*porque es una tabla*/
+		}
+		
+		.table tr:first-child{
+			background-color: lightcoral !important;
+		}
+			
+		.table tr:last-child{
+			background-color: rgb(255, 255, 128);
+		}	
+			
+		.table tr:nth-child(3){
+			background-color: black;
+			color: white;
+			
+		}
+		
+			.table tr:nth-child(odd){
+			background-color:lightblue;
+			color: white;
+			
+		}
+			
+		</style>
+</head>
+
+<body>
+	<main>
+		<section class="socios-container">
+			<h1>Socios</h1>
+			<table class="table">
+				<!--titulos de la tabla-->
+				<tr>	
+					<th>
+						ID
+					</th>		
+					<th>
+						NOMBRE
+					</th>	
+					<th>
+						APELLIDO
+					</th>	
+					<th>
+						CODIGO
+					</th>	
+					<th>
+						
+					</th>	
+				</tr>
+				
+				<!-- rows -->		
+				<tr th:each="socio : ${socios}">
+					<td th:text="${socio.id}">
+					</td>
+					<td th:text="${socio.nombre}">
+					</td>
+					<td th:text="${socio.apellido}">
+					</td>
+					<td th:text="${socio.codigo}">
+					</td>
+					<td>
+						<a th:href="@{'/socio/edit/'+ ${socio.id}}">Edit</a>
+						<a class="deleteLink" th:attr="onclick='guardarId(' + ${socio.id} +')'">Eliminar</a>
+					
+					</td>
+					
+				</tr>
+			</table>
+			<img scr="#" alt="Una imagen">
+		</section>	
+	</main>	
+</body>
+
+</html>
