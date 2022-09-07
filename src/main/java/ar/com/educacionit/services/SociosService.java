@@ -1,6 +1,7 @@
 package ar.com.educacionit.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,20 @@ public class SociosService {
 		
 		return this.repository.findAll();
 	}
-	
+
+	public void eliminar(Long idSocio) {
+		this.repository.deleteById(idSocio);
+		
+	}
+
+
+	public Socios buscarSocio(Long id) {
+		Optional<Socios> socios = this.repository.findById(id);
+		
+		if(socios.isPresent()) {
+			return socios.get();
+		} else {
+			return null;
+		}
+	}
 }
