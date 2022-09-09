@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
 
 /* MAPEO DE ENTIDADES 
  * */
@@ -27,12 +28,15 @@ public class Socios {
 	private Long id;
 	
 	@Column(nullable = false, length = 50, name = "apellido") //NOT NULL
+	@NotEmpty
 	private String apellido;
 	
 	@Column(nullable = false, length = 60) 
+	@NotEmpty
 	private String nombre;
 	
-	@Column(nullable = false, length = 6, unique = true) 
+	@Column(nullable = false, length = 6, unique = true)
+	@NotEmpty
 	private String codigo;
 
 	public Long getId() {
