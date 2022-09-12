@@ -15,29 +15,23 @@
 	<script>
 
 		function guardarId(id) {   
-			const hidden = document.getElementById("idSocio");
+			const hidden = document.getElementById("idCupon");
 			hidden.value = id;
 		}
 
 	</script>
 
-	<style>
-		.deleteLink {
-			text-decoration: underline;
-			cursor: pointer;
-		}
-	</style>
 </head>
 
 <body>
+	<div th:insert="navbar.html"></div>
 	<main>
-		<div th:insert="navbar.html"></div>
 		<section class="container">
 			<div class="row">
 				<div class="clo-12">
 					<h1>Cupones</h1>
 					<a th:href="@{/cupon/new}"
-						class="btn btn-info">
+						class="btn btn-primary">
 						Nuevo
 					</a>	
 				</div>	
@@ -93,7 +87,7 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+	        <h5 class="modal-title" id="exampleModalLabel">Eliminar Cupon</h5>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
@@ -103,10 +97,10 @@
 	      	<form id="frmDelete"
 	      		action="#"
 	      		th:method="GET"
-	      		th:action="@{/socio/delete}">
-	      		<input type="hidden" id="idSocio" name="idSocio">
-	        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-	        	<button type="submit" class="btn btn-primary">Save changes</button>
+	      		th:action="@{/cupon/delete}">
+	      		<input type="hidden" id="idCupon" name="id">
+	        	<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+	        	<button type="submit" class="btn btn-primary">Aceptar</button>
 	      	</form>
 	      </div>
 	    </div>

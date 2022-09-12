@@ -33,12 +33,12 @@ public class Cupon {
 	private String codigo;
 	
 	@NotNull
-	@DateTimeFormat(pattern ="yyy-MM-dd")
+	@DateTimeFormat(pattern ="yyyy-MM-dd")
 	@Column(name="fecha_vigencia_desde", nullable=false)
 	private Date fechaVigenciaDesde;
 	
-	@NotNull
-	@DateTimeFormat(pattern ="yyy-MM-dd")
+
+	@DateTimeFormat(pattern ="yyyy-MM-dd")
 	@Column(name="fecha_vigencia_hasta", nullable=true)
 	private Date fechaVigenciaHasta;
 	

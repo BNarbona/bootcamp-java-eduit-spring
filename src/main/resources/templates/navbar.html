@@ -22,13 +22,6 @@
 						Cupones
 					</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link active" aria-current="page" 
-						href="#" 
-						th:href="@{/cupon/list}">
-						Cupones2
-					</a>
-				</li>
 			</ul>
 			<a class="btn btn-danger" href="#" th:href="@{/logout}">
 				Logout
@@ -36,38 +29,5 @@
 		</div>
 	</div>
 </nav>
-
-<script>
-
-
-	// Get the container element
-	var btnContainer = document.getElementById("navbarSupportedContent");
-
-	// Get all buttons with class="btn" inside the container
-	var btns = btnContainer.getElementsByClassName("nav-link");
-
-	// Loop through the buttons and add the active class to the current/clicked button
-	for (var i = 0; i < btns.length; i++) {
-		btns[i].addEventListener("click", function () {
-			
-			localStorage.setItem(`{i}`, 'btn1');
-			
-			var current = document.getElementsByClassName("nav-link active");
-
-			// If there's no active class
-			if (current.length > 0) {
-				current[0].className = current[0].className.replace(" active", "");
-			}
-
-			// Add the active class to the current/clicked button
-			this.className += " active";
-			
-		});
-	}
-
-
-
-	</script>
-
 
 </html>
