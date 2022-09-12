@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class HomeController {
 
-	@GetMapping(value = "/")
+	@GetMapping(value = {"/","/home"})
 	public String home (Model model) {
 		
 		model.addAttribute("clave","v1");

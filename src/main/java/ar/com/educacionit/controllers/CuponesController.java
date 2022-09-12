@@ -1,30 +1,109 @@
 
 package ar.com.educacionit.controllers;
 
+import java.util.HashSet;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import ar.com.educacionit.domain.Cupon;
+import ar.com.educacionit.enums.CuponKeysEnum;
+import ar.com.educacionit.enums.CuponViewsEnum;
+import ar.com.educacionit.services.CuponService;
 
 @Controller
 @RequestMapping("/cupon")
 public class CuponesController {
 
-	/*
-	 	http://localhost:8080/cupon/list 
-	 */
+	@Autowired
+	private CuponService cuponService;
+	
+	
+	
 	@GetMapping("/list")
-	public String list(Model model) {
-		
-		Set<String> cupones = Set.of("Cupon1","Cupon2","Cupon3");
-		
-		//para pasar una lista a la vista debemos usar la interface Model
-		
-		//new Model();
-		model.addAttribute("list", cupones);
-		
-		return "list";//resources/templates/list.html
+	public String list (Model model) {
+		Set<Cupon > cupones = new HashSet<>(this.cuponService.buscarTodos());
+		model.addAttribute("CUPONES", cupones);
+		return CuponViewsEnum.LIST.getView();
 	}
+	
+	@GetMapping("/new")
+	public ModelAndView newCupon() {
+		
+		Cupon newCupon = new Cupon();
+		
+		ModelAndView model = new ModelAndView(CuponViewsEnum.NEW.getView());
+		model.addObject(CuponKeysEnum.CUPON.getKey(), newCupon);
+		
+		return model;
+	
+	}
+	
+	@PostMapping("/new")
+	 public String save(
+			 @Validated
+			 @ModelAttribute(name = "CUPON") Cupon cupon,
+			 BindingResult result
+			 ) {
+		
+		if(result.hasErrors()) {
+			return CuponViewsEnum.NEW.getView();
+		}
+		
+		this.cuponService.crear(cupon);
+		
+		return CuponViewsEnum.LIST_REDIRECT.getView();
+	}
+	
+	@RequestMapping("/edit/{id}")
+	public String edit(
+			@PathVariable(name="id", required = true) Long id,
+			Model model
+			) {
+		
+		Cupon cupon = this.cuponService.buscarCupon(id);
+		model.addAttribute(CuponKeysEnum.CUPON.getKey(), cupon);
+		return CuponViewsEnum.EDIT.getView();
+	}
+	
+	@PostMapping("/edit")
+	 public String edit(
+			 @Validated
+			 @ModelAttribute(name = "CUPON") Cupon cupon,
+			 BindingResult result
+			 ) {
+		
+		if(result.hasErrors()) {
+			return CuponViewsEnum.EDIT.getView();
+		}
+		
+		this.cuponService.crear(cupon);
+		
+		return CuponViewsEnum.LIST_REDIRECT.getView();
+	}
+	
+	@RequestMapping("/delete")
+	public String delete(
+		@RequestParam(name ="id", required=true) Long id
+		) {
+		
+		this.cuponService.eliminar(id);
+		
+		return CuponViewsEnum.LIST_REDIRECT.getView();
+	}
+	
+	
+	
 }
+
