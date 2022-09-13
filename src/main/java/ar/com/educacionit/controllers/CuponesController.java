@@ -103,7 +103,5 @@ public class CuponesController {
 		return CuponViewsEnum.LIST_REDIRECT.getView();
 	}
 	
-	
-	
 }
 
