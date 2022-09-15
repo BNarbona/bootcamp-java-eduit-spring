@@ -1,5 +1,7 @@
 package ar.com.educacionit.controllers;
 
+import java.security.Timestamp;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.core.annotation.AnnotationUtils;
@@ -12,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class GlobalDefaultExceptionHandler {
 
 	
-	public static final String DEFAULT_ERROR_VIEW = "error";
+	public static final String DEFAULT_ERROR_VIEW = "error2";
 	
 	@ExceptionHandler(value=Exception.class)
 	public ModelAndView
@@ -31,6 +33,8 @@ public class GlobalDefaultExceptionHandler {
 		//Othrewise setup and send the user to a default error-view
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("exception", e);
+		mav.addObject("message", e.getCause());
+		mav.addObject("timestamp","");
 		mav.addObject("url", req.getRequestURL());
 		mav.setViewName(DEFAULT_ERROR_VIEW);
 		return mav;

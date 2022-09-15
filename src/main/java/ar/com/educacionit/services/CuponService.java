@@ -7,41 +7,33 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ar.com.educacionit.domain.Cupon;
-import ar.com.educacionit.domain.Socios;
 import ar.com.educacionit.repository.CuponRepository;
-import ar.com.educacionit.repository.SociosRepository;
 
 @Service
 public class CuponService {
 
-	
+	//D.I
 	@Autowired
 	private CuponRepository repository;
-	
-	public List<Cupon> buscarTodos(){
-		
+
+	public List<Cupon> buscarTodos() {
 		return this.repository.findAll();
 	}
 
 	public void eliminar(Long id) {
-		this.repository.deleteById(id);
-		
+		this.repository.deleteById(id);		
 	}
 
-
-	public Cupon buscarCupon(Long id) {
+	public Cupon buscar(Long id) {
 		Optional<Cupon> entity = this.repository.findById(id);
-		
 		if(entity.isPresent()) {
 			return entity.get();
-		} else {
+		}else {
 			return null;
 		}
 	}
-
-	public Cupon crear (Cupon cupon) {
-		
+	
+	public Cupon crear(Cupon cupon) {
 		return this.repository.save(cupon);
-		
 	}
 }

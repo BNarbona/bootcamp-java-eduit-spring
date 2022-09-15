@@ -72,7 +72,7 @@ public class CuponesController {
 			Model model
 			) {
 		
-		Cupon cupon = this.cuponService.buscarCupon(id);
+		Cupon cupon = this.cuponService.buscar(id);
 		model.addAttribute(CuponKeysEnum.CUPON.getKey(), cupon);
 		return CuponViewsEnum.EDIT.getView();
 	}
