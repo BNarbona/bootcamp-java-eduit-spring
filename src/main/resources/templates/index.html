@@ -14,17 +14,29 @@
 		</header>	
 			<div class="row">
 				<div class="col-6">
-				<form 
-			 		action="#"
-			 		th:action="@{/home/archivo}"
-			 		th:method="POST"
-					>
-				  <label for="formFileLg" class="form-label"></label>
-				  <input class="form-control form-control-lg" id="formFileLg" type="file">
-				  <botton class="btn btn-success mt-3" type="submit">Subir archivo</botton>
-				</form>
-				<div>
-			</div>
+					<form 
+				 		action="#"
+				 		th:action="@{/upload/up}"
+				 		th:method="POST"
+				 		enctype="multipart/form-data"
+						>
+					  <label for="formFileLg" class="form-label"></label>
+					  <input class="form-control form-control-lg" id="formFileLg" type="file" name="file">
+					  <button class="btn btn-success mt-3 mb-3" type="submit">Subir archivo</button>
+					</form>
+					
+					<div th:if="${message}">
+						<div th:if="${error}" class="alert alert-danger" 
+							role="alert">
+		  					<p th:text="${message}"></p>
+						</div>
+						<div th:if="${error==null}" class="alert alert-success" 
+							role="alert">
+		  					<p th:text="${message}"></p>
+						</div>
+					</div>
+				</div>
+			</div>	
 		</section>	
 	</main>
 </body>
