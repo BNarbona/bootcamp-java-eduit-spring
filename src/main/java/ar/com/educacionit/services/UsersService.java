@@ -1,34 +1,37 @@
 package ar.com.educacionit.services;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
-import ar.com.educacionit.domain.Cupon;
-import ar.com.educacionit.domain.Socios;
 import ar.com.educacionit.domain.Users;
-import ar.com.educacionit.repository.CuponRepository;
-import ar.com.educacionit.repository.SociosRepository;
 import ar.com.educacionit.repository.UsersRepository;
 
 @Service
 public class UsersService {
 
-	
+	//D.I
 	@Autowired
 	private UsersRepository repository;
-	
-	public List<Users> buscarTodos(){
-		
+
+	public List<Users> buscarTodos() {
 		return this.repository.findAll();
 	}
 
+	/*
+	 * https://www.baeldung.com/spring-data-derived-queries
+	 **/
 	public Users buscarPorNombreDeUsuario(String username) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.repository.findByUsername(username);
 	}
 
+	public void crear(Users user) {
+		this.repository.save(user);		
+	}
 
+		
 }
+	
+	

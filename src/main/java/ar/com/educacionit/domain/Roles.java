@@ -1,16 +1,10 @@
 package ar.com.educacionit.domain;
 
-import java.util.Set;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.JoinColumn;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -23,7 +17,7 @@ public class Roles {
 	
 	@Column(name = "role")
 	private String role;
-	
+
 	public Long getId() {
 		return id;
 	}
@@ -39,6 +33,5 @@ public class Roles {
 	public void setRole(String role) {
 		this.role = role;
 	}
-
-
+	
 }

@@ -15,27 +15,25 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users")
+@Table(name = "users")
 public class Users {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name = "username")
-	private String username;
-	
-	@Column(name = "password")
+	@Column(name = "password", length = 100)
 	private String password;
+	
+	@Column(name = "username", length = 100)
+	private String username;
 
-	//quiero los roles del usuario
+	//roles del usuario
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name="users_roles",
 		joinColumns = @JoinColumn(name="users_id"),
 		inverseJoinColumns = @JoinColumn(name="roles_id"))
-
 	private Set<Roles> roles;
-	
 	
 	@ManyToOne
 	@JoinColumn(name = "users_category_id",referencedColumnName = "id")
@@ -47,14 +45,6 @@ public class Users {
 
 	public void setId(Long id) {
 		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getPassword() {
@@ -69,10 +59,24 @@ public class Users {
 		return roles;
 	}
 
+	public UsersCategory getCategory() {
+		return category;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 	public void setRoles(Set<Roles> roles) {
 		this.roles = roles;
 	}
-	
-	
-	
+
+	public void setCategory(UsersCategory category) {
+		this.category = category;
+	}
+
 }
