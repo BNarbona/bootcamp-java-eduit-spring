@@ -27,7 +27,7 @@ import ch.qos.logback.classic.spi.LoggingEvent;
 @RequestMapping("/upload")
 public class UploadController {
 
-	Logger logger = (Logger) LoggerFactory.getLogger("");
+	Logger logger = (Logger) LoggerFactory.getLogger(Controller.class);
 	
 	@PostMapping("/up")
 		public String uploadFile(
@@ -63,7 +63,7 @@ public class UploadController {
 			return "index";
 		}
 		
-		public static boolean validar (MultipartFile file) {
+		public boolean validar (MultipartFile file) {
 			String name = file.getOriginalFilename();
 			String [] arrayName = name.split("\\.");
 			String ext = arrayName[arrayName.length-1]; 
