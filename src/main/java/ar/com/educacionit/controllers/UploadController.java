@@ -27,7 +27,7 @@ import ch.qos.logback.classic.spi.LoggingEvent;
 @RequestMapping("/upload")
 public class UploadController {
 
-	Logger logger = (Logger) LoggerFactory.getLogger(Controller.class);
+	Logger logger = (Logger) LoggerFactory.getLogger(UploadController.class);
 	
 	@PostMapping("/up")
 		public String uploadFile(
