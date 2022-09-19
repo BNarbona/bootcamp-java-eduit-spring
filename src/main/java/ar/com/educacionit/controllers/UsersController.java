@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import ar.com.educacionit.domain.Users;
 import ar.com.educacionit.domain.UsersCategory;
+import ar.com.educacionit.services.UsersCategoryService;
 import ar.com.educacionit.services.UsersService;
 
 @Controller
@@ -22,6 +24,9 @@ public class UsersController {
 
 	@Autowired
 	private UsersService us;
+	
+	@Autowired
+	private UsersCategoryService ucs;
 	
 	@GetMapping("/all")
 	public String allUser () {
@@ -52,7 +57,9 @@ public class UsersController {
 		entity.setCategory(new UsersCategory());
 		
 		ModelAndView model = new ModelAndView("/user/new");
+		List<UsersCategory> categories = ucs.buscarTodos();
 		
+		model.addObject("CATEGORIES", categories);
 		model.addObject("USER", entity);
 		
 		return model;
@@ -62,17 +69,21 @@ public class UsersController {
 	public String save(
 			@Validated
 			@ModelAttribute(name = "USER") Users user,
-			BindingResult resul
+			BindingResult resul,
+			Model model
 			) {
-		
-		//verifico si hay errores
+
 		if(resul.hasErrors()) {
+			model.addAttribute("message", "Vuelva a ingresar los datos del usuario");
+			List<UsersCategory> categories = ucs.buscarTodos();
+			
+			model.addAttribute("CATEGORIES", categories);
 			return "/user/new";	
 		}
 		
 		this.us.crear(user);
-		
-		return "redirect:/";
+		model.addAttribute("message", "Usuario creado exitosamente");
+		return "home";
 	}
 	
 	

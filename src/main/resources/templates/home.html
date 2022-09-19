@@ -1,5 +1,9 @@
 <!DOCTYPE html>
-<html lang="es" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html lang="es" 
+ 	xmlns="http://www.w3.org/1999/xhtml" 
+ 	xmlns:th="http://www.thymeleaf.org"
+ 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+>
 
 <head>
 	<link rel="stylesheet" th:href="@{/css/bootstrap/themes/yeti/bootstrap.css}">
@@ -9,34 +13,37 @@
 </head>
 
 <body>
-<div th:insert="navbar.html"></div>
-	<main>
-		<section class="container-fluid">
-		
-			<header class="d-flex pb-3 mb-4 border-bottom">
-				<a href="#"
-					class="align-items-center text-dark text-decoration-none">
-				<spam>Hola: (Usuario)</spam>
-				</a>
-			</header>
+	<div th:insert="navbar.html"></div>
+		<main>
+			<section class="container-fluid">
 			
-			<div class="p-5 mb-4 bg-light rounded-3">
-				<div class="container-fluis py-5">
-					<h1 class="display-5 fw-bold">Bienvenido</h1>
-					<p class="col-md-8 fs-4">Sistema de Gestion de Cupones</p>
-					<a class="btn btn-primary btn-lg"
-						th:href="@{cupon/list}">
-						Ver Listado
+				<header class="d-flex justify-content-between pb-3 mt-2 mb-4 border-bottom">
+					<a href="#"
+						class="align-items-center text-dark text-decoration-none">
+						Hola: <span sec:authentication="name" style="text-transform:uppercase"> </spam>
 					</a>
+					<div sec:authentication="principal.authorities"></div>
+				</header>
+				
+				<div th:if="${message}" class="alert alert-success">
+						<p th:text="${message}"></p>	
 				</div>
-			</div>
-		</section>
-		<div class="container-fluid">
+				
+				<div class="p-5 mb-4 bg-light rounded-3">
+					<div class="container-fluis py-5">
+						<h1 class="display-5 fw-bold">Bienvenido</h1>
+						<p class="col-md-8 fs-4">Sistema de Gestion de Cupones</p>
+						<a class="btn btn-primary btn-lg"
+							th:href="@{cupon/list}">
+							Ver Listado
+						</a>
+					</div>
+				</div>
+			</section>
 			<footer class="d-flex pt-3 mt-4 text-muted border-top">
 				<p class="align-items-center">Bootcamp 2022 - EducatioIT
 			</footer>
-		</div>
-	</main>
+		</main>
 </body>
 
 
