@@ -56,7 +56,7 @@ public class UsersController {
 		Users entity = new Users();
 		entity.setCategory(new UsersCategory());
 		
-		ModelAndView model = new ModelAndView("/user/new");
+		ModelAndView model = new ModelAndView("user/new");
 		List<UsersCategory> categories = ucs.buscarTodos();
 		
 		model.addObject("CATEGORIES", categories);
@@ -78,7 +78,7 @@ public class UsersController {
 			List<UsersCategory> categories = ucs.buscarTodos();
 			
 			model.addAttribute("CATEGORIES", categories);
-			return "/user/new";	
+			return "user/new";	
 		}
 		
 		this.us.crear(user);
